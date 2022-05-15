@@ -1,0 +1,15 @@
+{
+  "name": "byz-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "command.js",
+  "bin": {
+    "byz-cli": "./command.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
