@@ -125,7 +125,8 @@ const TEMPLATES = FRAMEWORKS.map(
 ).reduce((a, b) => a.concat(b), [])
 
 const renameFiles = {
-    _gitignore: '.gitignore'
+    _gitignore: '_gitignore',
+    _eslintrc: '_eslintrc'
 }
 
 async function init() {
