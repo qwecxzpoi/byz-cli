@@ -7,22 +7,28 @@
     "create-byz-app": "index.js",
     "cba": "index.js"
   },
-  "keywords": ["self use"],
+  "keywords": [
+    "self use"
+  ],
   "author": "benyuanzhang",
   "license": "MIT",
   "files": [
     "index.js",
     "template-*"
   ],
+  "engines": {
+    "node": ">=14.6.0"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/qwecxzpoi/byz-cli"
+    "url": "git+https://github.com/qwecxzpoi/byz-cli"
   },
   "bugs": {
     "url": "https://github.com/qwecxzpoi/byz-cli/issues"
   },
   "dependencies": {
-    "fs-extra": "^9.0.0",
-    "minimist": "^1.2.5"
+    "kolorist": "^1.5.1",
+    "minimist": "^1.2.6",
+    "prompts": "^2.4.2"
   }
 }
