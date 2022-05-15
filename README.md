@@ -1,6 +1,2 @@
-# template
-## template-vue
-based on [create-vite-app/template-vue](https://github.com/vitejs/create-vite-app/tree/master/template-vue)
-
-## template-vue-ts
-based on [create-vite-app/template-vue-ts](https://github.com/vitejs/create-vite-app/tree/master/template-vue-ts)
+# Note
+this cli is based on [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite)
