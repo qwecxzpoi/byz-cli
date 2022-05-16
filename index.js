@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
+// based on https://github.com/vitejs/vite/tree/main/packages/create-vite/index.js
+
 // @ts-check
 const fs = require('fs')
 const path = require('path')
-// Avoids autoconversion to number of the project name by defining that the args
+// Avoids auto conversion to number of the project name by defining that the args
 // non associated with an option ( _ ) needs to be parsed as a string. See #4606
 const argv = require('minimist')(process.argv.slice(2), { string: ['_'] })
 // eslint-disable-next-line node/no-restricted-require
@@ -14,7 +16,6 @@ const {
     cyan,
     blue,
     magenta,
-    lightRed,
     red,
     reset
 } = require('kolorist')
@@ -23,20 +24,8 @@ const cwd = process.cwd()
 
 const FRAMEWORKS = [
     {
-        name: 'vanilla',
-        color: yellow,
-        variants: [
-            {
-                name: 'vanilla',
-                display: 'JavaScript',
-                color: yellow
-            },
-            {
-                name: 'vanilla-ts',
-                display: 'TypeScript',
-                color: blue
-            }
-        ]
+        name: 'ts',
+        color: yellow
     },
     {
         name: 'vue',
@@ -71,62 +60,20 @@ const FRAMEWORKS = [
         ]
     },
     {
-        name: 'preact',
-        color: magenta,
-        variants: [
-            {
-                name: 'preact',
-                display: 'JavaScript',
-                color: yellow
-            },
-            {
-                name: 'preact-ts',
-                display: 'TypeScript',
-                color: blue
-            }
-        ]
-    },
-    {
-        name: 'lit',
-        color: lightRed,
-        variants: [
-            {
-                name: 'lit',
-                display: 'JavaScript',
-                color: yellow
-            },
-            {
-                name: 'lit-ts',
-                display: 'TypeScript',
-                color: blue
-            }
-        ]
-    },
-    {
-        name: 'svelte',
-        color: red,
-        variants: [
-            {
-                name: 'svelte',
-                display: 'JavaScript',
-                color: yellow
-            },
-            {
-                name: 'svelte-ts',
-                display: 'TypeScript',
-                color: blue
-            }
-        ]
+        name: 'nest',
+        color: magenta
     }
 ]
 
+// 获取框架的模板名称
 const TEMPLATES = FRAMEWORKS.map(
     (f) => (f.variants && f.variants.map((v) => v.name)) || [f.name]
 ).reduce((a, b) => a.concat(b), [])
 
+// 重命名文件信息
 const renameFiles = {
-    _gitignore: '_gitignore',
-    _eslintrc: '_eslintrc'
+    _gitignore: '.gitignore',
+    _eslintrc: '.eslintrc'
 }
 
 async function init() {
