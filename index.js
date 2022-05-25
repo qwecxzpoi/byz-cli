@@ -14,7 +14,6 @@ const {
     yellow,
     green,
     cyan,
-    blue,
     magenta,
     red,
     reset
