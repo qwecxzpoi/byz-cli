@@ -28,36 +28,12 @@ const FRAMEWORKS = [
         color: yellow
     },
     {
-        name: 'vue',
+        name: 'vue-ts',
         color: green,
-        variants: [
-            {
-                name: 'vue',
-                display: 'JavaScript',
-                color: yellow
-            },
-            {
-                name: 'vue-ts',
-                display: 'TypeScript',
-                color: blue
-            }
-        ]
     },
     {
-        name: 'react',
-        color: cyan,
-        variants: [
-            {
-                name: 'react',
-                display: 'JavaScript',
-                color: yellow
-            },
-            {
-                name: 'react-ts',
-                display: 'TypeScript',
-                color: blue
-            }
-        ]
+        name: 'react-ts',
+        color: cyan
     },
     {
         name: 'nest',
