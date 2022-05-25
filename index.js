@@ -73,7 +73,8 @@ const TEMPLATES = FRAMEWORKS.map(
 // 重命名文件信息
 const renameFiles = {
     _gitignore: '.gitignore',
-    _eslintrc: '.eslintrc'
+    _eslintrc: '.eslintrc',
+    _eslintrcignore: '.eslintrcignore',
 }
 
 async function init() {

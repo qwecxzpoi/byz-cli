@@ -1,0 +1,8 @@
+root = true
+[*]
+end_of_line = lf
+charset = utf-8
+
+[*.{js, jsx,tsx,ts, yml}]
+indent_style = space
+indent_size = 2
