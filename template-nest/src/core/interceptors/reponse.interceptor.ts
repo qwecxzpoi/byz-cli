@@ -8,10 +8,10 @@ export class ResponseInterceptor implements NestInterceptor {
     const response = context.switchToHttp().getResponse<Response>()
     return next.handle().pipe(
       map(data => ({
+        code: response.statusCode,
         data,
-        err_no: 0,
         err_msg: '',
-        code: response.statusCode
+        err_no: 0,
       }))
     )
     return next.handle()
