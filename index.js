@@ -5,11 +5,11 @@
 // @ts-check
 const fs = require('fs')
 const path = require('path')
-// Avoids auto conversion to number of the project name by defining that the args
-// non associated with an option ( _ ) needs to be parsed as a string. See #4606
+// avoids auto conversion to number of the project name by defining that the args
 const argv = require('minimist')(process.argv.slice(2), { string: ['_'] })
-// eslint-disable-next-line node/no-restricted-require
+// 提示
 const prompts = require('prompts')
+// 控制台文字颜色
 const {
     yellow,
     green,
@@ -20,13 +20,11 @@ const {
     reset
 } = require('kolorist')
 
+// 获取当前路径
 const cwd = process.cwd()
 
+// 框架列表
 const FRAMEWORKS = [
-    {
-        name: 'ts',
-        color: yellow
-    },
     {
         name: 'vue',
         color: green,
@@ -44,28 +42,16 @@ const FRAMEWORKS = [
         ]
     },
     {
-        name: 'react',
+        name: 'react-ts',
         color: cyan,
-        variants: [
-            {
-                name: 'react',
-                display: 'JavaScript',
-                color: yellow
-            },
-            {
-                name: 'react-ts',
-                display: 'TypeScript',
-                color: blue
-            }
-        ]
     },
     {
         name: 'nest',
-        color: magenta
+        color: magenta,
     }
 ]
 
-// 获取框架的模板名称
+// 获取所有的模板名称
 const TEMPLATES = FRAMEWORKS.map(
     (f) => (f.variants && f.variants.map((v) => v.name)) || [f.name]
 ).reduce((a, b) => a.concat(b), [])
@@ -77,11 +63,15 @@ const renameFiles = {
 }
 
 async function init() {
+    // 项目路径
     let targetDir = argv._[0]
+    // 获取模板名称，对象为 --template 或 -t
     let template = argv.template || argv.t
 
+    // 项目名称
     const defaultProjectName = !targetDir
         ? 'vite-project'
+        // 去掉空格，删除结尾的 '/'
         : targetDir.trim().replace(/\/+$/g, '')
 
     let result = {}
@@ -89,6 +79,7 @@ async function init() {
     try {
         result = await prompts(
             [
+                // 项目名称
                 {
                     type: targetDir ? null : 'text',
                     name: 'projectName',
@@ -98,6 +89,7 @@ async function init() {
                         (targetDir =
                             state.value.trim().replace(/\/+$/g, '') || defaultProjectName)
                 },
+                // 是否重载目标目录
                 {
                     type: () =>
                         !fs.existsSync(targetDir) || isEmpty(targetDir) ? null : 'confirm',
@@ -108,6 +100,7 @@ async function init() {
                             : `Target directory "${targetDir}"`) +
                         ` is not empty. Remove existing files and continue?`
                 },
+                // 重载检测
                 {
                     type: (_, { overwrite } = {}) => {
                         if (overwrite === false) {
@@ -117,6 +110,7 @@ async function init() {
                     },
                     name: 'overwriteChecker'
                 },
+                // package.json - name 名称变为项目名称
                 {
                     type: () => (isValidPackageName(targetDir) ? null : 'text'),
                     name: 'packageName',
@@ -125,7 +119,9 @@ async function init() {
                     validate: (dir) =>
                         isValidPackageName(dir) || 'Invalid package.json name'
                 },
+                // 选择框架
                 {
+                    // template 包含在框架列表中则不用选择，否则进入选项
                     type: template && TEMPLATES.includes(template) ? null : 'select',
                     name: 'framework',
                     message:
@@ -143,6 +139,7 @@ async function init() {
                         }
                     })
                 },
+                // 是否存在子目录
                 {
                     type: (framework) =>
                         framework && framework.variants ? 'select' : null,
@@ -160,6 +157,7 @@ async function init() {
                 }
             ],
             {
+                // 取消
                 onCancel: () => {
                     throw new Error(red('✖') + ' Operation cancelled')
                 }
@@ -181,8 +179,8 @@ async function init() {
         fs.mkdirSync(root, { recursive: true })
     }
 
-    // determine template
-    template = variant || framework || template
+    // determine template. 如果没有变种，则 framework.name
+    template = variant || framework.name || template
 
     console.log(`\nScaffolding project in ${root}...`)
 
@@ -244,43 +242,55 @@ function isValidPackageName(projectName) {
         projectName
     )
 }
-
+// 转换名称格式
 function toValidPackageName(projectName) {
     return projectName
+        // 去掉末尾空格
         .trim()
+        // 全小写
         .toLowerCase()
+        // 将数字替换为空字符
         .replace(/\s+/g, '-')
+        // 将 . 与 _ 替换为空字符
         .replace(/^[._]/, '')
+        // 将除了 a-z0-9-~ 以外的字符转换为 -。 ^ 在 [] 中表示非
         .replace(/[^a-z0-9-~]+/g, '-')
 }
 
+/**
+ * 复制文件
+ * @param {string} srcDir 路径
+ * @param {string} destDir 目标路径
+ */
 function copyDir(srcDir, destDir) {
+    // 递归创建目录
     fs.mkdirSync(destDir, { recursive: true })
+    // 读取路径中的文件并将文件名遍历出来
     for (const file of fs.readdirSync(srcDir)) {
+        // 路径+文件名
         const srcFile = path.resolve(srcDir, file)
+        // 目标+文件名
         const destFile = path.resolve(destDir, file)
+        // 复制
         copy(srcFile, destFile)
     }
 }
 
+// 判断目录是否为空，如果有一个 .git 仍然判为空文件夹
 function isEmpty(path) {
     const files = fs.readdirSync(path)
     return files.length === 0 || (files.length === 1 && files[0] === '.git')
 }
 
+// 清空目录
 function emptyDir(dir) {
     if (!fs.existsSync(dir)) {
         return
     }
     for (const file of fs.readdirSync(dir)) {
         const abs = path.resolve(dir, file)
-        // baseline is Node 12 so can't use rmSync :(
-        if (fs.lstatSync(abs).isDirectory()) {
-            emptyDir(abs)
-            fs.rmdirSync(abs)
-        } else {
-            fs.unlinkSync(abs)
-        }
+        // vite baseline is Node 12 so can't use rmSync, but i baseline is Node 16
+        fs.rmSync(abs, { recursive: true, force: true })
     }
 }
 
