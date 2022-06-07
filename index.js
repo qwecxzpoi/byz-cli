@@ -180,7 +180,8 @@ async function init() {
     }
 
     // determine template. 如果没有变种，则 framework.name
-    template = variant || framework.name || template
+    console.log(framework);
+    template = variant || framework?.name || template
 
     console.log(`\nScaffolding project in ${root}...`)
 
