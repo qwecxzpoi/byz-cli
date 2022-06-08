@@ -11,10 +11,8 @@ const argv = require('minimist')(process.argv.slice(2), { string: ['_'] })
 const prompts = require('prompts')
 // 控制台文字颜色
 const {
-    yellow,
     green,
     cyan,
-    blue,
     magenta,
     red,
     reset
@@ -26,20 +24,8 @@ const cwd = process.cwd()
 // 框架列表
 const FRAMEWORKS = [
     {
-        name: 'vue',
+        name: 'vue-ts',
         color: green,
-        variants: [
-            {
-                name: 'vue',
-                display: 'JavaScript',
-                color: yellow
-            },
-            {
-                name: 'vue-ts',
-                display: 'TypeScript',
-                color: blue
-            }
-        ]
     },
     {
         name: 'react-ts',
@@ -58,8 +44,11 @@ const TEMPLATES = FRAMEWORKS.map(
 
 // 重命名文件信息
 const renameFiles = {
+    _idea: '.idea',
     _gitignore: '.gitignore',
-    _eslintrc: '.eslintrc'
+    _eslintrc: '.eslintrc',
+    _eslintignore: '.eslintignore',
+    _editorconfig: '.editorconfig',
 }
 
 async function init() {
