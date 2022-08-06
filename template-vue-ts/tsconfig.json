@@ -15,6 +15,6 @@
 	  "types": ["element-plus/global"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue",
-    "auto-imports.d.ts", "components.d.ts"],
+    "auto-imports.d.ts"],
   "references": [{ "path": "./tsconfig.node.json"}]
 }
