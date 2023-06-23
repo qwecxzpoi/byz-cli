@@ -4,14 +4,18 @@
   "description": "create often project",
   "main": "index.js",
   "bin": {
-    "create-byz-app": "index.js",
-    "cba": "index.js"
+    "create-my-app": "index.js",
+    "cma": "index.js"
   },
   "keywords": [
     "self use"
   ],
   "author": "benyuanzhang",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "http://66.135.26.53:9001/repository/npm-local/"
+  },
   "files": [
     "index.js",
     "template-*"
