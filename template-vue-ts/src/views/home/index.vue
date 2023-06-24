@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-defineOptions({
-  name: 'Home',
-})
+defineOptions({ name: 'Home' })
 </script>
 
 <template>

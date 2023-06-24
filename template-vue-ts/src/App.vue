@@ -8,8 +8,11 @@ defineOptions({
 
 <template>
   <p>
-    <router-link to="/index">
+    <router-link to="/">
       index
+    </router-link>
+    <router-link to="/home">
+      home
     </router-link>
     <router-link to="/hello">
       hello
