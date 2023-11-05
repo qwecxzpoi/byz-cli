@@ -169,7 +169,6 @@ async function init() {
     }
 
     // determine template. 如果没有变种，则 framework.name
-    console.log(framework);
     template = variant || framework?.name || template
 
     console.log(`\nScaffolding project in ${root}...`)
@@ -206,10 +205,6 @@ async function init() {
         console.log(`  cd ${path.relative(cwd, root)}`)
     }
     switch (pkgManager) {
-        case 'yarn':
-            console.log('  yarn')
-            console.log('  yarn dev')
-            break
         default:
             console.log(`  ${pkgManager} install`)
             console.log(`  ${pkgManager} run dev`)
