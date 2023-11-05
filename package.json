@@ -4,8 +4,7 @@
   "description": "create often project",
   "main": "index.js",
   "bin": {
-    "create-byz-app": "index.js",
-    "cba": "index.js"
+    "byz": "index.js"
   },
   "keywords": [
     "self use"
