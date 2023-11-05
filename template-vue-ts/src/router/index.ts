@@ -1,20 +1,8 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+// @ts-expect-error unplugin-vue-router 声明的与 vue-router 冲突
+import { createRouter, createWebHashHistory } from 'vue-router/auto'
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: [
-    { path: '', redirect: 'index' },
-    {
-      name: 'index',
-      path: '/index',
-      component: () => import('@/views/home/index.vue'),
-    },
-    {
-      name: 'hello',
-      path: '/hello',
-      component: () => import('@/components/HelloWorld.vue'),
-    },
-  ],
 })
 
 export default router

@@ -1,5 +1,6 @@
-<!-- <script lang="ts" setup> -->
-<!-- </script> -->
+<script lang="ts" setup>
+defineOptions({ name: 'Home' })
+</script>
 
 <template>
   test

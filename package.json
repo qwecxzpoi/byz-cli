@@ -11,6 +11,10 @@
   ],
   "author": "benyuanzhang",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "http://localhost:8181/repository/npm-local/"
+  },
   "files": [
     "index.js",
     "template-*"
