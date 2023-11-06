@@ -1,5 +1,2 @@
-.idea
-**/node_modules
-**/pnpm-lock.yaml
 .DS_Store
-typed-router.d.ts
+.idea

@@ -1,26 +1,22 @@
 {
   "name": "@byz/cli",
-  "version": "1.0.2",
-  "description": "create often project",
+  "version": "1.0.3",
+  "description": "create project",
   "main": "index.js",
   "bin": {
     "byz": "index.js"
   },
-  "keywords": [
-    "self use"
-  ],
+  "keywords": [],
   "author": "benyuanzhang",
   "license": "MIT",
-  "publishConfig": {
-    "access": "public",
-    "registry": "http://localhost:8181/repository/npm-local/"
-  },
   "files": [
     "index.js",
-    "template-*"
+    "template-nest",
+    "template-react-ts",
+    "template-vue-ts"
   ],
   "engines": {
-    "node": ">=14.6.0"
+    "node": "^16.0.0 || >=20.0.0"
   },
   "repository": {
     "type": "git",
